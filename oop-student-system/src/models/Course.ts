@@ -17,4 +17,20 @@ export class Course {
     getStudentGrades(): Map<Student, number> {
         return this.grades;
     }
+
+    calculateAverage(): number {
+        let sum = 0;
+        let count = 0;
+
+        for (const [student, grade] of this.grades) {
+            sum += grade;
+            count++;
+        }
+
+        if (count === 0) {
+            return 0;
+        }
+
+        return sum / count;
+    }
 }
