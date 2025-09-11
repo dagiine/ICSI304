@@ -1,0 +1,50 @@
+@startuml Student-System-Clean
+
+class Person {
+    + id: string
+    + name: string
+    + age: number
+    + introduce(): string
+}
+
+class Student {
+    - courses: string[]
+}
+
+class Teacher {
+    + subject: string
+}
+
+class Course {
+    + students: Student[]
+    - grades: Map<Student, number>
+    + id: string
+    + name: string
+    + teacherId: string
+    + enrollStudent(): void
+    + assignGrade(): void
+    + getStudentGrades(): Map<Student, number>
+}
+
+class TeacherService {
+    - teachers: Teacher[]
+    + getTeacherById(): Teacher
+}
+
+class StudentService {
+    - students: Student[]
+    + findStudentById(): Student
+}
+
+class CourseService {
+    - courses: Course[]
+    + enrollStudent(): void
+    + assignGrade(): void
+}
+
+Person <|-- Student
+Person <|-- Teacher
+Course "1" o-- "*" Student: enrolled in
+Course "1" --> "1" Teacher : taught by
+
+@enduml
